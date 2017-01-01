@@ -6,6 +6,12 @@
 //  Copyright © 2016 ballgeier. All rights reserved.
 //
 
+// even though I seemed to get location (well, San Francisco anyway) to show on map
+// the variable isUserLocationVisible still resulted in false. Why?
+
+// didn't get button to show
+// note the code in the button doesn't seem to use a delegate
+
 //import Foundation
 import UIKit
 import MapKit
@@ -60,28 +66,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         findMeButton.setImage(UIImage(named: "NavigationIcon"), for: UIControlState.normal)
         findMeButton.addTarget(self, action: #selector(findUserLocation(_:)), for: UIControlEvents.touchUpInside)
         view.addSubview(findMeButton)
-        findMeButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor, constant: 8).isActive = true
+        findMeButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor, constant: -8).isActive = true
         findMeButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         
-        let locationAuthStatus = CLLocationManager.authorizationStatus() // note a type method
+        //let locationAuthStatus = CLLocationManager.authorizationStatus() // note a type method
         // not an instance method
-        locationManager.delegate = self
-        if locationAuthStatus == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        } // end if
+        //locationManager.delegate = self
+        //if locationAuthStatus == .notDetermined {
+            //locationManager.requestWhenInUseAuthorization()
+        //} // end if
         
-        if CLLocationManager.locationServicesEnabled() {
-            mapView.showsUserLocation = true
-            mapView.setUserTrackingMode(.follow, animated: true)
-            print("Shows user location: \(mapView.showsUserLocation)")
-            print("Is user's location showing on map: \(mapView.isUserLocationVisible)")
+        //if CLLocationManager.locationServicesEnabled() {
+           // mapView.showsUserLocation = true
+           // mapView.setUserTrackingMode(.follow, animated: true)
+            //print("\nShows user location: \(mapView.showsUserLocation)\n\n")
+            //print("\nIs user's location showing on map: \(mapView.isUserLocationVisible)\n\n")
             
-        } // end if
+        //} // end if
         
     } // end loadView
     
     func findUserLocation(_ button: UIButton) {
-        print("You found me")
+        print("\nYou found me\n\n")
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+            mapView.setUserTrackingMode(.follow, animated: true)
+        } // end if
+        else {
+            locationManager.requestWhenInUseAuthorization()
+        } // end else
     }
     
     func mapTypeChanged(_ segControl: UISegmentedControl) {
@@ -101,7 +114,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // Always call the super implementation of viewDidLoad
         super.viewDidLoad()
         
-        print("MapViewController loaded its view")
+        print("\nMapViewController loaded its view\n\n")
     } // end viewDidLoad
     
 } // end MapViewController

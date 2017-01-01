@@ -12,7 +12,7 @@ import WebKit
 
 class WebViewController: UIViewController {
     var webView: WKWebView!
-    
+        
     override func loadView() {
         webView = WKWebView()
         

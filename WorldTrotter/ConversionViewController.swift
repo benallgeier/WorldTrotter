@@ -6,6 +6,12 @@
 //  Copyright © 2016 ballgeier. All rights reserved.
 //
 
+// only filtered for CharacterSet.letters
+// so we can put in other symbols from the keyboard (like . and , (not 
+// the decimal separator) and a variety of other symbols
+// what is a professional way to filter these
+// we essentially only want digits and a decimal separator to be allowed
+
 //import Foundation
 import UIKit
 
@@ -16,7 +22,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     var fahrenheitValue: Double? {
         didSet {                          // property observer
             updateCelsiusLabel()
-            print("fahrenheitValue is \(fahrenheitValue)")
+            print("\nfahrenheitValue is \(fahrenheitValue)\n\n")
         }
     } // end fahrenheitValue
     var celsiusValue: Double? {           // computed property
@@ -173,7 +179,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         // Always call the super implementation of viewDidLoad
         super.viewDidLoad()
         
-        print("ConversionViewController loaded its view")
+        print("\nConversionViewController loaded its view\n\n")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,7 +192,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         let components = (calendar as NSCalendar).components([.hour, .minute], from: date)
         let hour = components.hour
         let minute = components.minute
-        print("hour is \(hour) and minutes is \(minute)")
+        print("\nhour is \(hour) and minutes is \(minute)\n\n")
         if (hour! >= 6 && hour! <= 17) {
             view!.backgroundColor = UIColor.yellow
         } // end if
@@ -194,7 +200,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
             view!.backgroundColor = UIColor.gray
         } // end else
         
-        print("ConversionViewController will appear")
+        print("\nConversionViewController will appear\n\n")
     } // end viewWillAppear
     
 } // end ConversionViewController
